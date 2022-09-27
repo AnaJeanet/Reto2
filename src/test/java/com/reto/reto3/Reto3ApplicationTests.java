@@ -1,10 +1,10 @@
-package com.reto.reto2;
+package com.reto.reto3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Reto2ApplicationTests {
+class Reto3ApplicationTests {
 
 	@Test
 	void contextLoads() {
