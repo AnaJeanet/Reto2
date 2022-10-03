@@ -1,6 +1,7 @@
 package com.reto.reto3.controllers;
 
-import com.reto.reto3.model.Usuario;
+
+import com.reto.reto3.entities.Usuario;
 import com.reto.reto3.repository.UsuarioCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
