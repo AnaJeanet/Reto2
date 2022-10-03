@@ -1,5 +1,7 @@
 package com.reto.reto3.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 public class Client {
@@ -8,7 +10,9 @@ public class Client {
     private  String password;
     private  String name;
     private  Integer age;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Message> messages;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Reservation> reservations;
 
     public Client() {

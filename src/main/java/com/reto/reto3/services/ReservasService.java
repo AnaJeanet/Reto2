@@ -2,21 +2,34 @@ package com.reto.reto3.services;
 
 import com.reto.reto3.dto.*;
 import com.reto.reto3.entities.*;
+import com.reto.reto3.repository.ClienteRepository;
+import com.reto.reto3.repository.EstadoReservaRepository;
+import com.reto.reto3.repository.MotosCrudRepository;
 import com.reto.reto3.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservasService {
 
     private final ReservaRepository reservaRepository;
+    private final ClienteRepository clienteRepository;
+    private final MotosCrudRepository motoRepository;
+    private final EstadoReservaRepository estadoReservaRepository;
 
     @Autowired
-    public ReservasService(ReservaRepository reservaRepository) {
+    public ReservasService(ReservaRepository reservaRepository, ClienteRepository clienteRepository,
+                           MotosCrudRepository motoRepository,
+                           EstadoReservaRepository estadoReservaRepository) {
         this.reservaRepository = reservaRepository;
+        this.clienteRepository = clienteRepository;
+        this.motoRepository = motoRepository;
+        this.estadoReservaRepository = estadoReservaRepository;
     }
 
     public List<Reservation> getAllReservas(){
@@ -44,7 +57,7 @@ public class ReservasService {
 
             Motocicleta moto = reserva.getIdMotocicleta();
             Motorcycle motorcycle = new Motorcycle();
-            motorcycle.setId(motorcycle.getId());
+            motorcycle.setId(moto.getId());
             motorcycle.setBrand(moto.getMarca());
             motorcycle.setDescription(moto.getDescripcion());
             motorcycle.setYear(moto.getAnio());
@@ -71,5 +84,32 @@ public class ReservasService {
         }
 
         return response;
+    }
+
+    public String saveReservation(Reservation reservation) {
+        LocalDate fechaInicio = reservation.getStartDate();
+        LocalDate fechaDevolucion = reservation.getDevolutionDate();
+        if (fechaInicio.isAfter(fechaDevolucion)){
+            return "Error, la fecha inicial debe ser anterior a la de devolucion";
+        }
+        Reserva reserva = new Reserva();
+
+        reserva.setFechaInicio(fechaInicio);
+        reserva.setFechaEntrega(fechaDevolucion);
+        Optional<Cliente> cliente = clienteRepository.findById(reservation.getClient().getIdClient());
+        if (cliente.isPresent()) {
+            reserva.setIdCliente(cliente.get());
+        }
+        Optional<Motocicleta> moto = motoRepository.findById(reservation.getMotorbike().getId());
+        if (moto.isPresent()) {
+            reserva.setIdMotocicleta(moto.get());
+        }
+        Optional<EstadoReserva> estadoReserva = estadoReservaRepository.findById(2);
+        if (estadoReserva.isPresent()){
+            reserva.setIdEstadoReserva(estadoReserva.get());
+        }
+
+        reservaRepository.save(reserva);
+        return "";
     }
 }
