@@ -3,6 +3,7 @@ package com.reto.reto3.controllers;
 import com.reto.reto3.dto.Motorcycle;
 import com.reto.reto3.services.MotoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class MotoController {
         return motoService.getAllMotos();
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
     public void saveMoto(@RequestBody Motorcycle moto) {
         motoService.saveMoto(moto);
     }

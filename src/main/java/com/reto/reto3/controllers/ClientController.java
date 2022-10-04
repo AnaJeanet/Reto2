@@ -3,6 +3,7 @@ package com.reto.reto3.controllers;
 import com.reto.reto3.dto.Client;
 import com.reto.reto3.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class ClientController {
         return clientService.getAllClients();
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
     public void saveClient(@RequestBody Client client){
         clientService.saveClient(client);
     }
