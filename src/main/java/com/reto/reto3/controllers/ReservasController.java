@@ -24,7 +24,7 @@ public class ReservasController {
         return reservasService.getAllReservas();
     }
 
-    @PostMapping(path = "/all")
+    @PostMapping(path = "/save")
     @ResponseStatus(HttpStatus.CREATED)
     public String saveReservation(@RequestBody Reservation reservation) {
         return reservasService.saveReservation(reservation);

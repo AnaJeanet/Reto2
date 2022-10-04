@@ -23,7 +23,7 @@ public class ClientController {
         return clientService.getAllClients();
     }
 
-    @PostMapping(path = "/all")
+    @PostMapping(path = "/save")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveClient(@RequestBody Client client){
         clientService.saveClient(client);

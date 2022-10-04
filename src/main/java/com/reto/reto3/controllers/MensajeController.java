@@ -25,7 +25,7 @@ public class MensajeController {
         return mensajesService.getAllMessages();
     }
 
-    @PostMapping(path = "/all")
+    @PostMapping(path = "/save")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveMoto(@RequestBody Message message){
         mensajesService.saveMoto(message);

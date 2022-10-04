@@ -24,7 +24,7 @@ public class MotoController {
         return motoService.getAllMotos();
     }
 
-    @PostMapping(path = "/all")
+    @PostMapping(path = "/save")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveMoto(@RequestBody Motorcycle moto) {
         motoService.saveMoto(moto);
