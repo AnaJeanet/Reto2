@@ -93,9 +93,11 @@ public class MotoService {
         }
         motocicleta.setNombre(moto.getName());
         motocicleta.setDescripcion(moto.getDescription());
-        Optional<EstadoMotocicleta> estado = estadoMotocicletaRepository.findById(1);
-        if (estado.isPresent()) {
-            motocicleta.setIdEstadoMotocicletas(estado.get());
+        Iterable<EstadoMotocicleta> estados = estadoMotocicletaRepository.findAll();
+        EstadoMotocicleta estado = estados.iterator().next();
+
+        if (estado != null) {
+            motocicleta.setIdEstadoMotocicletas(estado);
         }
 
         motosRepository.save(motocicleta);

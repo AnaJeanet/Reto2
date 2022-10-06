@@ -5,7 +5,7 @@ CREATE TABLE `categorias` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- reto3.clientes definition
@@ -17,7 +17,7 @@ CREATE TABLE `clientes` (
   `edad` int NOT NULL,
   `contraseña` varchar(45) NOT NULL,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- reto3.estado_motocicletas definition
@@ -26,7 +26,7 @@ CREATE TABLE `estado_motocicletas` (
   `id_estado_motocicletas` int NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id_estado_motocicletas`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- reto3.estado_reserva definition
@@ -35,7 +35,7 @@ CREATE TABLE `estado_reserva` (
   `id_estado_reserva` int NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id_estado_reserva`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- reto3.roles definition
@@ -62,7 +62,7 @@ CREATE TABLE `motocicletas` (
   KEY `motocicletas_FK_1` (`id_estado_motocicletas`),
   CONSTRAINT `motocicletas_FK` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
   CONSTRAINT `motocicletas_FK_1` FOREIGN KEY (`id_estado_motocicletas`) REFERENCES `estado_motocicletas` (`id_estado_motocicletas`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- reto3.reservas definition
@@ -82,7 +82,7 @@ CREATE TABLE `reservas` (
   CONSTRAINT `reservas_FK` FOREIGN KEY (`id_motocicleta`) REFERENCES `motocicletas` (`id_motocicleta`),
   CONSTRAINT `reservas_FK_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
   CONSTRAINT `reservas_FK_2` FOREIGN KEY (`id_estado_reserva`) REFERENCES `estado_reserva` (`id_estado_reserva`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- reto3.usuarios definition
@@ -123,7 +123,7 @@ CREATE TABLE `mensajes` (
   KEY `mensajes_FK_1` (`id_cliente`),
   CONSTRAINT `mensajes_FK` FOREIGN KEY (`id_motocicleta`) REFERENCES `motocicletas` (`id_motocicleta`),
   CONSTRAINT `mensajes_FK_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO estado_motocicletas
 (id_estado_motocicletas, descripcion)
