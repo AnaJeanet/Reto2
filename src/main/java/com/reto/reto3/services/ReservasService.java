@@ -104,7 +104,7 @@ public class ReservasService {
         if (moto.isPresent()) {
             reserva.setIdMotocicleta(moto.get());
         }
-        Optional<EstadoReserva> estadoReserva = estadoReservaRepository.findById(2);
+        Optional<EstadoReserva> estadoReserva = estadoReservaRepository.findById(1);
         if (estadoReserva.isPresent()){
             reserva.setIdEstadoReserva(estadoReserva.get());
         }

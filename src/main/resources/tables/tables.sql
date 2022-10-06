@@ -124,3 +124,12 @@ CREATE TABLE `mensajes` (
   CONSTRAINT `mensajes_FK` FOREIGN KEY (`id_motocicleta`) REFERENCES `motocicletas` (`id_motocicleta`),
   CONSTRAINT `mensajes_FK_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO estado_motocicletas
+(id_estado_motocicletas, descripcion)
+VALUES(1, 'created');
+
+
+INSERT INTO estado_reserva
+(id_estado_reserva, descripcion)
+VALUES(1, 'created');
