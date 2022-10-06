@@ -1,6 +1,7 @@
 package com.reto.reto3.services;
 
 import com.reto.reto3.dto.Category;
+import com.reto.reto3.dto.Client;
 import com.reto.reto3.dto.Message;
 import com.reto.reto3.dto.Motorcycle;
 import com.reto.reto3.entities.Categoria;
@@ -55,6 +56,17 @@ public class MensajesService {
             category.setName(categoria.getNombre());
             motorcycle.setCategory(category);
             message.setMotorbike(motorcycle);
+            //Cliente
+            Cliente cliente = mensaje.getIdCliente();
+            Client client = new Client();
+            if (cliente != null) {
+                client.setIdClient(cliente.getId());
+                client.setEmail(cliente.getCorreo());
+                client.setPassword(cliente.getContraseña());
+                client.setName(cliente.getNombre());
+                client.setAge(cliente.getEdad());
+            }
+            message.setClient(client);
             messageList.add(message);
         }
         return messageList;

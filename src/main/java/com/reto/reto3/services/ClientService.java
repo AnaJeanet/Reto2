@@ -3,7 +3,7 @@ package com.reto.reto3.services;
 import com.reto.reto3.dto.Client;
 import com.reto.reto3.dto.Message;
 import com.reto.reto3.dto.Motorcycle;
-import com.reto.reto3.dto.Reservation;
+import com.reto.reto3.dto.ReservationRequest;
 import com.reto.reto3.entities.Cliente;
 import com.reto.reto3.entities.Mensaje;
 import com.reto.reto3.entities.Motocicleta;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.List;
 
 @Service
@@ -44,10 +43,10 @@ public class ClientService {
                 messageList.add(message);
             }
             client.setMessages(messageList);
-            List<Reservation> reservationList = new ArrayList<>();
+            List<ReservationRequest> reservationList = new ArrayList<>();
             List<Reserva> reservas = cliente.getReservas();
             for (Reserva reserva: reservas) {
-                Reservation reservation = new Reservation();
+                ReservationRequest reservation = new ReservationRequest();
                 reservation.setIdReservation(reserva.getId());
                 reservation.setStartDate(reserva.getFechaInicio());
                 reservation.setDevolutionDate(reserva.getFechaEntrega());

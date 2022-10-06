@@ -55,9 +55,9 @@ public class MotoService {
             motorcycle.setMessages(messageList);
 
             //Reservations
-            List<Reservation> reservationList = new ArrayList<>();
+            List<ReservationRequest> reservationList = new ArrayList<>();
             for (Reserva reserva : moto.getReservas()) {
-                Reservation reservation = new Reservation();
+                ReservationRequest reservation = new ReservationRequest();
                 reservation.setIdReservation(reserva.getId());
                 reservation.setStartDate(reserva.getFechaInicio());
                 reservation.setDevolutionDate(reserva.getFechaEntrega());

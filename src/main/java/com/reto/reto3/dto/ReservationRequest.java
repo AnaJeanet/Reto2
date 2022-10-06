@@ -1,12 +1,15 @@
 package com.reto.reto3.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDate;
 
-public class Reservation {
+public class ReservationRequest {
     private Integer idReservation;
+
     private LocalDate startDate;
+
     private LocalDate devolutionDate;
     private String status;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -15,10 +18,10 @@ public class Reservation {
     private Client client;
     private String score;
 
-    public Reservation() {
+    public ReservationRequest() {
     }
 
-    public Reservation(Integer idReservation, LocalDate startDate, LocalDate devolutionDate, String status, Motorcycle motorbike, Client client, String score) {
+    public ReservationRequest(Integer idReservation, LocalDate startDate, LocalDate devolutionDate, String status, Motorcycle motorbike, Client client, String score) {
         this.idReservation = idReservation;
         this.startDate = startDate;
         this.devolutionDate = devolutionDate;

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,14 +33,16 @@ public class ReservasService {
         this.estadoReservaRepository = estadoReservaRepository;
     }
 
-    public List<Reservation> getAllReservas(){
-        List<Reservation> response = new ArrayList<>();
+    public List<ReservationResponse> getAllReservas(){
+        List<ReservationResponse> response = new ArrayList<>();
         Iterable<Reserva> reservas = reservaRepository.findAll();
         for (Reserva reserva : reservas) {
-            Reservation reservation = new Reservation();
+            ReservationResponse reservation = new ReservationResponse();
             reservation.setIdReservation(reserva.getId());
-            reservation.setStartDate(reserva.getFechaInicio());
-            reservation.setDevolutionDate(reserva.getFechaEntrega());
+            DateTimeFormatter patron = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formato ="T00:00:00.000+00:00";
+            reservation.setStartDate(reserva.getFechaInicio().format(patron) + formato);
+            reservation.setDevolutionDate(reserva.getFechaEntrega().format(patron) + formato);
             if (reserva.getIdEstadoReserva() != null) {
                 reservation.setStatus(reserva.getIdEstadoReserva().getDescripcion());
             }
@@ -86,7 +89,7 @@ public class ReservasService {
         return response;
     }
 
-    public String saveReservation(Reservation reservation) {
+    public String saveReservation(ReservationRequest reservation) {
         LocalDate fechaInicio = reservation.getStartDate();
         LocalDate fechaDevolucion = reservation.getDevolutionDate();
         if (fechaInicio.isAfter(fechaDevolucion)){

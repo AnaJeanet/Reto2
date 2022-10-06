@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Motorcycle {
     private Integer id;
-    private String brand;
     private String name;
+    private String brand;
     private Integer year;
     private String description;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -15,15 +15,16 @@ public class Motorcycle {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Message> messages;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Reservation> reservations;
+    private List<ReservationRequest> reservations;
 
     public Motorcycle() {
     }
 
-    public Motorcycle(Integer id, String brand, String name, Integer year, String description, Category category, List<Message> messages, List<Reservation> reservations) {
+    public Motorcycle(Integer id, String name, String brand, Integer year, String description, Category category,
+                      List<Message> messages, List<ReservationRequest> reservations) {
         this.id = id;
-        this.brand = brand;
         this.name = name;
+        this.brand = brand;
         this.year = year;
         this.description = description;
         this.category = category;
@@ -31,12 +32,12 @@ public class Motorcycle {
         this.reservations = reservations;
     }
 
-    public String getBrand() {
-        return brand;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,6 +46,14 @@ public class Motorcycle {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public Integer getYear() {
@@ -71,14 +80,6 @@ public class Motorcycle {
         this.category = category;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public List<Message> getMessages() {
         return messages;
     }
@@ -87,11 +88,11 @@ public class Motorcycle {
         this.messages = messages;
     }
 
-    public List<Reservation> getReservations() {
+    public List<ReservationRequest> getReservations() {
         return reservations;
     }
 
-    public void setReservations(List<Reservation> reservations) {
+    public void setReservations(List<ReservationRequest> reservations) {
         this.reservations = reservations;
     }
 }

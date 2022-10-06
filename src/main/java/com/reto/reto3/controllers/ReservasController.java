@@ -1,6 +1,7 @@
 package com.reto.reto3.controllers;
 
-import com.reto.reto3.dto.Reservation;
+import com.reto.reto3.dto.ReservationRequest;
+import com.reto.reto3.dto.ReservationResponse;
 import com.reto.reto3.services.ReservasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +21,13 @@ public class ReservasController {
     }
 
     @GetMapping(path = "/all")
-    public List<Reservation> getAllReservations() {
+    public List<ReservationResponse> getAllReservations() {
         return reservasService.getAllReservas();
     }
 
     @PostMapping(path = "/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveReservation(@RequestBody Reservation reservation) {
+    public String saveReservation(@RequestBody ReservationRequest reservation) {
         return reservasService.saveReservation(reservation);
     }
 }

@@ -13,13 +13,13 @@ public class Client {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Message> messages;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Reservation> reservations;
+    private List<ReservationRequest> reservations;
 
     public Client() {
     }
 
     public Client(Integer idClient, String email, String password, String name, Integer age,
-                  List<Message> messages, List<Reservation> reservations) {
+                  List<Message> messages, List<ReservationRequest> reservations) {
         this.idClient = idClient;
         this.email = email;
         this.password = password;
@@ -77,11 +77,11 @@ public class Client {
         this.messages = messages;
     }
 
-    public List<Reservation> getReservations() {
+    public List<ReservationRequest> getReservations() {
         return reservations;
     }
 
-    public void setReservations(List<Reservation> reservations) {
+    public void setReservations(List<ReservationRequest> reservations) {
         this.reservations = reservations;
     }
 }
