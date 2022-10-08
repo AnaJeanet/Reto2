@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController()
 @RequestMapping(path = "/api/Client")
@@ -27,5 +28,23 @@ public class ClientController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveClient(@RequestBody Client client){
         clientService.saveClient(client);
+    }
+    
+    @GetMapping("/{id}")
+    public Optional<Client> getClient(@PathVariable int idClient){
+        return clientService.getClient(idClient);
+    }
+    
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client update(@RequestBody Client client){
+        return clientService.update(client);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable int id){
+        return clientService.delete(id);
     }
 }

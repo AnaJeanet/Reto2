@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,5 +53,35 @@ public class CategoriaService {
         categoria.setDescripcion(category.getDescription());
         categoria.setNombre(category.getName());
         categoriaRepository.save(categoria);
+    }
+    
+    public Category update(Category p){
+        if(p.getId()!=null){
+            Optional<Category> q = categoryRepository.getCategory(p.getId());
+            if(q.isPresent()){
+                if(p.getName()!=null){
+                    q.get().setName(p.getName());
+                }
+                if(p.getDescription()!=null){
+                    q.get().setDescription(p.getDescription());
+                }
+                categoryRepository.save(q.get());
+                return q.get();
+            }else{
+                return p;
+            }
+        }else{
+            return p;
+        }
+    }
+    
+    public boolean delete(int id){
+        boolean flag=false;
+        Optional<Category>p= categoryRepository.getCategory(id);
+        if(p.isPresent()){
+            categoryRepository.delete(p.get());
+            flag=true;
+        }
+        return flag;
     }
 }

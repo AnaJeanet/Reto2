@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/Category")
@@ -31,6 +32,21 @@ public class CategoriaController {
         categoriaService.saveCategory(category);
     }
 
-
+    @GetMapping("/(id)")
+    public Optional<Category> getCategory(@PathVariable("id") int idCategory){
+        return categoriaService.getCategory(idCategory);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category update(@RequestBody Category category){
+        return categoriaService.update(category);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable int id){
+        return categoriaService.delete(id);
+    }
 
 }

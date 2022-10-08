@@ -85,4 +85,32 @@ public class MensajesService {
         }
         mensajesRepository.save(mensaje);
     }
+    
+    
+        public Message update(Message p){
+        if(p.getIdMessage()!=null){
+            Optional<Message> q = messageRepository.getMessage(p.getIdMessage());
+            if(q.isPresent()){
+                if(p.getMessageText()!=null){
+                    q.get().setMessageText(p.getMessageText());
+                }
+                messageRepository.save(q.get());
+                return q.get();
+            }else{
+                return p;
+            }
+        }else{
+            return p;
+        }
+    }
+    public boolean delete(int id){
+        boolean flag=false;
+        Optional<Message>p= mensajesRepository.getMessage(id);
+        if(p.isPresent()){
+            messageRepository.delete(p.get());
+            flag=true;
+        }
+        return flag;
+
+    }
 }

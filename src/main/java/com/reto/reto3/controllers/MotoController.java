@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/Motorbike")
@@ -28,6 +29,23 @@ public class MotoController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveMoto(@RequestBody Motorcycle moto) {
         motoService.saveMoto(moto);
+    }
+    
+        @GetMapping("/(id)")
+    public Optional<Motorcycle> getMotorbike(@PathVariable("id") int idMoto){
+        return motoService.getMotorbike(idMoto);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Motorcycle update(@RequestBody Motorcycle motorbike){
+        return motoService.update(motorbike);
+    }
+        
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable int id){
+        return motoService.delete(id);
     }
 
 }

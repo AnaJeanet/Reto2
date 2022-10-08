@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -78,5 +79,46 @@ public class ClientService {
         cliente.setCorreo(client.getEmail());
         cliente.setEdad(client.getAge());
         clienteRepository.save(cliente);
+    }
+    
+    
+    public Client update(Client p){
+        if(p.getIdClient()!=null){
+            Optional<Client> q = clientRepository.getClient(p.getIdClient());
+            if(q.isPresent()){
+                if(p.getName()!=null){
+                    q.get().setName(p.getName());
+                }
+                if(p.getAge()!=null){
+                    q.get().setAge(p.getAge());
+                }
+                if(p.getEmail()!=null){
+                    q.get().setEmail(p.getEmail());
+                }
+                if(p.getPassword()!=null){
+                    q.get().setPassword(p.getPassword());
+                }
+                clientRepository.save(q.get());
+                return q.get();
+            }else{
+                return p;
+            }
+        }else{
+            return p;
+        }
+    }
+    public boolean delete(int idClient){
+        boolean flag=false;
+        Optional<Client>p= clientRepository.getClient(idClient);
+        if(p.isPresent()){
+            clientRepository.delete(p.get());
+            flag=true;
+        }
+        return flag;
+
+    }
+
+    public Optional<Client> getClient(int clientId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

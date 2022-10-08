@@ -102,4 +102,43 @@ public class MotoService {
 
         motosRepository.save(motocicleta);
     }
+    
+    
+        public Motorcycle update(Motorcycle p){
+        if(p.getId()!=null){
+            Optional<Motorcycle> q = MotorcycleRepository.getMotorbike(p.getId());
+            if(q.isPresent()){
+                if(p.getBrand()!=null){
+                    q.get().setName(p.getBrand());
+                }
+                if(p.getYear()!=null){
+                    q.get().setYear(p.getYear());
+                }
+                if(p.getName()!=null){
+                    q.get().setName(p.getName());
+                }
+                if(p.getDescription()!=null){
+                    q.get().setName(p.getDescription());
+                }
+
+                MotorcycleRepository.save(q.get());
+                return q.get();
+            }else{
+                return p;
+            }
+        }else{
+            return p;
+        }
+    }
+    public boolean delete(int id){
+        boolean flag=false;
+        Optional<Motorcycle>p= MotorcycleRepository.getMotorbike(id);
+        if(p.isPresent()){
+            MotorcycleRepository.delete(p.get());
+            flag=true;
+        }
+        return flag;
+
+    }
+    
 }

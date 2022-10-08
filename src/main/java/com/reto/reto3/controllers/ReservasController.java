@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/Reservation")
@@ -29,5 +30,22 @@ public class ReservasController {
     @ResponseStatus(HttpStatus.CREATED)
     public String saveReservation(@RequestBody ReservationRequest reservation) {
         return reservasService.saveReservation(reservation);
+    }
+    
+        @GetMapping("/(id)")
+    public Optional<ReservationRequest> getReservation(@PathVariable("id") int idReservation){
+        return reservasService.getReservation(idReservation);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ReservationRequest update(@RequestBody ReservationRequest reservation){
+        return reservasService.update(reservation);
+    }
+      
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable int id){
+        return reservasService.delete(id);
     }
 }
