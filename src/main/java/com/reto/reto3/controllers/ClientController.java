@@ -32,7 +32,7 @@ public class ClientController {
         return clientService.deleteById(id);
     }
 
-    @PutMapping(path = "/")
+    @PutMapping(path = "/update")
     public String updateClient(@RequestBody Client client){
         return clientService.updateClient(client);
     }

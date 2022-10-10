@@ -36,7 +36,7 @@ public class CategoriaController {
         return categoriaService.deleteById(id);
     }
 
-    @PutMapping(path = "/")
+    @PutMapping(path = "/update")
     public String updateCategory(@RequestBody Category category){
         return categoriaService.updateCategory(category);
     }

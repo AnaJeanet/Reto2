@@ -37,7 +37,7 @@ public class MensajeController {
         return mensajesService.deleteById(id);
     }
 
-    @PutMapping(path = "/")
+    @PutMapping(path = "/update")
     public String updateMessage(@RequestBody Message client){
         return mensajesService.updateMessage(client);
     }

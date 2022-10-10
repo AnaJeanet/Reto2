@@ -36,7 +36,7 @@ public class MotoController {
         return motoService.deleteById(id);
     }
 
-    @PutMapping(path = "/")
+    @PutMapping(path = "/update")
     public String updateMoto(@RequestBody Motorcycle moto){
         return motoService.updateMoto(moto);
     }

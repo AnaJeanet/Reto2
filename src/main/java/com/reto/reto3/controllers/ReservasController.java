@@ -37,7 +37,7 @@ public class ReservasController {
         return reservasService.deleteById(id);
     }
 
-    @PutMapping(path = "/")
+    @PutMapping(path = "/update")
     public String updateReservation(@RequestBody ReservationRequest reservation){
         return reservasService.updateReserva(reservation);
     }
