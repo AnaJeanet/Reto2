@@ -31,6 +31,15 @@ public class CategoriaController {
         categoriaService.saveCategory(category);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public String deleteCategory(@PathVariable Integer id){
+        return categoriaService.deleteById(id);
+    }
+
+    @PutMapping(path = "/")
+    public String updateCategory(@RequestBody Category category){
+        return categoriaService.updateCategory(category);
+    }
 
 
 }

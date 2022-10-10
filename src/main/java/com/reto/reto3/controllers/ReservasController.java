@@ -1,5 +1,6 @@
 package com.reto.reto3.controllers;
 
+import com.reto.reto3.dto.Motorcycle;
 import com.reto.reto3.dto.ReservationRequest;
 import com.reto.reto3.dto.ReservationResponse;
 import com.reto.reto3.services.ReservasService;
@@ -29,5 +30,15 @@ public class ReservasController {
     @ResponseStatus(HttpStatus.CREATED)
     public String saveReservation(@RequestBody ReservationRequest reservation) {
         return reservasService.saveReservation(reservation);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public String deleteReservation(@PathVariable Integer id){
+        return reservasService.deleteById(id);
+    }
+
+    @PutMapping(path = "/")
+    public String updateReservation(@RequestBody ReservationRequest reservation){
+        return reservasService.updateReserva(reservation);
     }
 }

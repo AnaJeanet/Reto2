@@ -1,5 +1,6 @@
 package com.reto.reto3.controllers;
 
+import com.reto.reto3.dto.Client;
 import com.reto.reto3.dto.Message;
 import com.reto.reto3.dto.Motorcycle;
 import com.reto.reto3.repository.MensajesRepository;
@@ -29,6 +30,16 @@ public class MensajeController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveMoto(@RequestBody Message message){
         mensajesService.saveMoto(message);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public String deleteMessage(@PathVariable Integer id){
+        return mensajesService.deleteById(id);
+    }
+
+    @PutMapping(path = "/")
+    public String updateMessage(@RequestBody Message client){
+        return mensajesService.updateMessage(client);
     }
 
 }

@@ -102,4 +102,39 @@ public class MotoService {
 
         motosRepository.save(motocicleta);
     }
+
+    public String deleteById(Integer id) {
+        Optional<Motocicleta> motoDb = motosRepository.findById(id);
+        if (motoDb.isPresent()) {
+            motosRepository.deleteById(id);
+            return "";
+        }
+        return "Motorcycle not found";
+    }
+
+    public String updateMoto(Motorcycle moto) {
+        Optional<Motocicleta> motoDb = motosRepository.findById(moto.getId());
+        if (motoDb.isPresent()) {
+            Motocicleta motocicleta = new Motocicleta();
+            motocicleta.setId(moto.getId());
+            motocicleta.setMarca(moto.getBrand());
+            motocicleta.setAnio(moto.getYear());
+            Optional<Categoria> categoria = categoriaRepository.findById(moto.getCategory().getId());
+            if (categoria.isPresent()){
+                motocicleta.setIdCategoria(categoria.get());
+            }
+            motocicleta.setNombre(moto.getName());
+            motocicleta.setDescripcion(moto.getDescription());
+            Iterable<EstadoMotocicleta> estados = estadoMotocicletaRepository.findAll();
+            EstadoMotocicleta estado = estados.iterator().next();
+
+            if (estado != null) {
+                motocicleta.setIdEstadoMotocicletas(estado);
+            }
+
+            motosRepository.save(motocicleta);
+            return "";
+        }
+        return "Motorcycle not found";
+    }
 }

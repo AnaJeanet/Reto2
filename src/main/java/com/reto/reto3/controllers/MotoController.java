@@ -1,5 +1,6 @@
 package com.reto.reto3.controllers;
 
+import com.reto.reto3.dto.Message;
 import com.reto.reto3.dto.Motorcycle;
 import com.reto.reto3.services.MotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,16 @@ public class MotoController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveMoto(@RequestBody Motorcycle moto) {
         motoService.saveMoto(moto);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public String deleteMoto(@PathVariable Integer id){
+        return motoService.deleteById(id);
+    }
+
+    @PutMapping(path = "/")
+    public String updateMoto(@RequestBody Motorcycle moto){
+        return motoService.updateMoto(moto);
     }
 
 }

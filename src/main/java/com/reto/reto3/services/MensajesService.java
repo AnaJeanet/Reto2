@@ -85,4 +85,33 @@ public class MensajesService {
         }
         mensajesRepository.save(mensaje);
     }
+
+    public String deleteById(Integer id) {
+        Optional<Mensaje> mensajeDB = mensajesRepository.findById(id);
+        if (mensajeDB.isPresent()){
+            mensajesRepository.deleteById(id);
+            return "";
+        }
+        return "Message Not found";
+    }
+
+    public String updateMessage(Message message) {
+        Optional<Mensaje> mensajeDB = mensajesRepository.findById(message.getIdMessage());
+        if (mensajeDB.isPresent()){
+            Mensaje mensaje = new Mensaje();
+            mensaje.setId(message.getIdMessage());
+            mensaje.setTexto(message.getMessageText());
+            Optional<Cliente> cliente = clienteRepository.findById(message.getClient().getIdClient());
+            if (cliente.isPresent()) {
+                mensaje.setIdCliente(cliente.get());
+            }
+            Optional<Motocicleta> moto = motosCrudRepository.findById(message.getMotorbike().getId());
+            if (moto.isPresent()) {
+                mensaje.setIdMotocicleta(moto.get());
+            }
+            mensajesRepository.save(mensaje);
+            return "";
+        }
+        return "Message Not found";
+    }
 }

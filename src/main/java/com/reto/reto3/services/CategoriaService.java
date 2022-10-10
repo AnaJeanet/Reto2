@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,5 +53,28 @@ public class CategoriaService {
         categoria.setDescripcion(category.getDescription());
         categoria.setNombre(category.getName());
         categoriaRepository.save(categoria);
+    }
+
+    public String deleteById(Integer id) {
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        if (categoria.isPresent()){
+            categoriaRepository.delete(categoria.get());
+            return "";
+        }
+        return "Category not found";
+    }
+
+    public String updateCategory(Category category) {
+        Optional<Categoria> categoriaBD = categoriaRepository.findById(category.getId());
+        if (categoriaBD.isPresent()){
+            Categoria categoria = new Categoria();
+            categoria.setId(category.getId());
+            categoria.setDescripcion(category.getDescription());
+            categoria.setNombre(category.getName());
+            categoriaRepository.save(categoria);
+            return "";
+        }
+        return "category not found";
+
     }
 }

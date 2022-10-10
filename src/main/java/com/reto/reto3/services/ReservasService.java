@@ -115,4 +115,44 @@ public class ReservasService {
         reservaRepository.save(reserva);
         return "";
     }
+
+    public String deleteById(Integer id) {
+        Optional<Reserva> reservaDB = reservaRepository.findById(id);
+        if (reservaDB.isPresent()){
+            reservaRepository.deleteById(id);
+            return "";
+        }
+        return "Reservation not found";
+    }
+
+    public String updateReserva(ReservationRequest reservation) {
+        Optional<Reserva> reservaDB = reservaRepository.findById(reservation.getIdReservation());
+        if (reservaDB.isPresent()){
+            LocalDate fechaInicio = reservation.getStartDate();
+            LocalDate fechaDevolucion = reservation.getDevolutionDate();
+            if (fechaInicio.isAfter(fechaDevolucion)){
+                return "Error, la fecha inicial debe ser anterior a la de devolucion";
+            }
+            Reserva reserva = new Reserva();
+            reserva.setId(reservation.getIdReservation());
+            reserva.setFechaInicio(fechaInicio);
+            reserva.setFechaEntrega(fechaDevolucion);
+            Optional<Cliente> cliente = clienteRepository.findById(reservation.getClient().getIdClient());
+            if (cliente.isPresent()) {
+                reserva.setIdCliente(cliente.get());
+            }
+            Optional<Motocicleta> moto = motoRepository.findById(reservation.getMotorbike().getId());
+            if (moto.isPresent()) {
+                reserva.setIdMotocicleta(moto.get());
+            }
+            Optional<EstadoReserva> estadoReserva = estadoReservaRepository.findById(1);
+            if (estadoReserva.isPresent()){
+                reserva.setIdEstadoReserva(estadoReserva.get());
+            }
+
+            reservaRepository.save(reserva);
+            return "";
+        }
+        return "Reservation not found";
+    }
 }

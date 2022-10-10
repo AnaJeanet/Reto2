@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -78,5 +79,29 @@ public class ClientService {
         cliente.setCorreo(client.getEmail());
         cliente.setEdad(client.getAge());
         clienteRepository.save(cliente);
+    }
+
+    public String deleteById(Integer id) {
+        Optional<Cliente> clientDB = clienteRepository.findById(id);
+        if (clientDB.isPresent()){
+            clienteRepository.deleteById(id);
+            return "";
+        }
+        return "Client not found";
+    }
+
+    public String updateClient(Client client) {
+        Optional<Cliente> clientDB = clienteRepository.findById(client.getIdClient());
+        if (clientDB.isPresent()){
+            Cliente cliente = new Cliente();
+            cliente.setId(client.getIdClient());
+            cliente.setNombre(client.getName());
+            cliente.setContraseña(client.getPassword());
+            cliente.setCorreo(client.getEmail());
+            cliente.setEdad(client.getAge());
+            clienteRepository.save(cliente);
+            return "";
+        }
+        return "Client not found";
     }
 }
