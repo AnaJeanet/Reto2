@@ -119,9 +119,12 @@ public class MotoService {
             motocicleta.setId(moto.getId());
             motocicleta.setMarca(moto.getBrand());
             motocicleta.setAnio(moto.getYear());
-            Optional<Categoria> categoria = categoriaRepository.findById(moto.getCategory().getId());
-            if (categoria.isPresent()){
-                motocicleta.setIdCategoria(categoria.get());
+            motocicleta.setIdCategoria(motoDb.get().getIdCategoria());
+            if (moto.getCategory() != null && moto.getCategory().getId() != null){
+                Optional<Categoria> categoria = categoriaRepository.findById(moto.getCategory().getId());
+                if (categoria.isPresent()){
+                    motocicleta.setIdCategoria(categoria.get());
+                }
             }
             motocicleta.setNombre(moto.getName());
             motocicleta.setDescripcion(moto.getDescription());
