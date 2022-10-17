@@ -33,12 +33,14 @@ public class MensajeController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public String deleteMessage(@PathVariable Integer id){
         return mensajesService.deleteById(id);
     }
 
     @PutMapping(path = "/update")
-    public String updateMessage(@RequestBody Message client){
+    @ResponseStatus(HttpStatus.CREATED)
+    public boolean updateMessage(@RequestBody Message client){
         return mensajesService.updateMessage(client);
     }
 

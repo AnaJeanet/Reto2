@@ -112,7 +112,7 @@ public class MotoService {
         return "Motorcycle not found";
     }
 
-    public String updateMoto(Motorcycle moto) {
+    public boolean updateMoto(Motorcycle moto) {
         Optional<Motocicleta> motoDb = motosRepository.findById(moto.getId());
         if (motoDb.isPresent()) {
             Motocicleta motocicleta = new Motocicleta();
@@ -136,8 +136,8 @@ public class MotoService {
             }
 
             motosRepository.save(motocicleta);
-            return "";
+            return true;
         }
-        return "Motorcycle not found";
+        return false;
     }
 }

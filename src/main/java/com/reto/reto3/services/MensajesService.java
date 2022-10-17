@@ -95,7 +95,7 @@ public class MensajesService {
         return "Message Not found";
     }
 
-    public String updateMessage(Message message) {
+    public boolean updateMessage(Message message) {
         Optional<Mensaje> mensajeDB = mensajesRepository.findById(message.getIdMessage());
         if (mensajeDB.isPresent()){
             Mensaje mensaje = new Mensaje();
@@ -110,8 +110,8 @@ public class MensajesService {
                 mensaje.setIdMotocicleta(moto.get());
             }
             mensajesRepository.save(mensaje);
-            return "";
+            return true;
         }
-        return "Message Not found";
+        return false;
     }
 }

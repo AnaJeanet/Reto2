@@ -32,12 +32,14 @@ public class MotoController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public String deleteMoto(@PathVariable Integer id){
         return motoService.deleteById(id);
     }
 
     @PutMapping(path = "/update")
-    public String updateMoto(@RequestBody Motorcycle moto){
+    @ResponseStatus(HttpStatus.CREATED)
+    public boolean updateMoto(@RequestBody Motorcycle moto){
         return motoService.updateMoto(moto);
     }
 

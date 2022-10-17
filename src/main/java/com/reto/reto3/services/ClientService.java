@@ -90,7 +90,7 @@ public class ClientService {
         return "Client not found";
     }
 
-    public String updateClient(Client client) {
+    public boolean updateClient(Client client) {
         Optional<Cliente> clientDB = clienteRepository.findById(client.getIdClient());
         if (clientDB.isPresent()){
             Cliente cliente = new Cliente();
@@ -100,8 +100,8 @@ public class ClientService {
             cliente.setCorreo(client.getEmail());
             cliente.setEdad(client.getAge());
             clienteRepository.save(cliente);
-            return "";
+            return true;
         }
-        return "Client not found";
+        return false;
     }
 }

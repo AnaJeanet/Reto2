@@ -32,12 +32,14 @@ public class CategoriaController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public String deleteCategory(@PathVariable Integer id){
         return categoriaService.deleteById(id);
     }
 
     @PutMapping(path = "/update")
-    public String updateCategory(@RequestBody Category category){
+    @ResponseStatus(HttpStatus.CREATED)
+    public boolean updateCategory(@RequestBody Category category){
         return categoriaService.updateCategory(category);
     }
 

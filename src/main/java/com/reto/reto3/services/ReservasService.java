@@ -125,13 +125,13 @@ public class ReservasService {
         return "Reservation not found";
     }
 
-    public String updateReserva(ReservationRequest reservation) {
+    public boolean updateReserva(ReservationRequest reservation) {
         Optional<Reserva> reservaDB = reservaRepository.findById(reservation.getIdReservation());
         if (reservaDB.isPresent()){
             LocalDate fechaInicio = reservation.getStartDate();
             LocalDate fechaDevolucion = reservation.getDevolutionDate();
             if (fechaInicio.isAfter(fechaDevolucion)){
-                return "Error, la fecha inicial debe ser anterior a la de devolucion";
+                return false;
             }
             Reserva reserva = new Reserva();
             reserva.setId(reservation.getIdReservation());
@@ -151,8 +151,8 @@ public class ReservasService {
             }
 
             reservaRepository.save(reserva);
-            return "";
+            return true;
         }
-        return "Reservation not found";
+        return false;
     }
 }

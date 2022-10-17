@@ -64,7 +64,7 @@ public class CategoriaService {
         return "Category not found";
     }
 
-    public String updateCategory(Category category) {
+    public boolean updateCategory(Category category) {
         Optional<Categoria> categoriaBD = categoriaRepository.findById(category.getId());
         if (categoriaBD.isPresent()){
             Categoria categoria = new Categoria();
@@ -72,9 +72,9 @@ public class CategoriaService {
             categoria.setDescripcion(category.getDescription());
             categoria.setNombre(category.getName());
             categoriaRepository.save(categoria);
-            return "";
+            return true;
         }
-        return "category not found";
+        return false;
 
     }
 }

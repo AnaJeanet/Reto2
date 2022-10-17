@@ -33,12 +33,14 @@ public class ReservasController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public String deleteReservation(@PathVariable Integer id){
         return reservasService.deleteById(id);
     }
 
     @PutMapping(path = "/update")
-    public String updateReservation(@RequestBody ReservationRequest reservation){
+    @ResponseStatus(HttpStatus.CREATED)
+    public boolean updateReservation(@RequestBody ReservationRequest reservation){
         return reservasService.updateReserva(reservation);
     }
 }
